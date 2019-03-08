@@ -13,7 +13,7 @@ class ArrayHandler extends AbstractComponent implements HandlerInterface
 {
 
     /**
-     * @var \Mix\Tcp\Session\WebSocketSession
+     * @var \Mix\Tcp\Session\TcpSession
      */
     public $parent;
 
