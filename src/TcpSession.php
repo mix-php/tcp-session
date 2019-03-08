@@ -6,11 +6,11 @@ use Mix\Core\Component\AbstractComponent;
 use Mix\Core\Component\ComponentInterface;
 
 /**
- * Class WebSocketSession
- * @package Mix\WebSocket\Session
+ * Class TcpSession
+ * @package Mix\Tcp\Session
  * @author LIUJIAN <coder.keda@gmail.com>
  */
-class WebSocketSession extends AbstractComponent
+class TcpSession extends AbstractComponent
 {
 
     /**
