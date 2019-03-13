@@ -32,24 +32,26 @@ class TcpSession extends AbstractComponent
     public $fd;
 
     /**
-     * 前置初始化
+     * 提取文件描述符
+     * 为了支持 TcpSession 在全部的子协程中使用，所以需要每次使用都提取当前的文件描述符
+     * @return bool
      */
-    public function onBeforeInitialize()
+    protected function extractFileDescriptor()
     {
-        parent::onBeforeInitialize();
         // 设置fd
         if (\Mix::$app->isRunning('tcp')) {
             $this->fd = \Mix::$app->tcp->fd;
-            return;
+            return true;
         }
         if (\Mix::$app->isRunning('ws')) {
             $this->fd = \Mix::$app->ws->fd;
-            return;
+            return true;
         }
         if (\Mix::$app->isRunning('request')) {
             $this->fd = \Mix::$app->request->fd;
-            return;
+            return true;
         }
+        return false;
     }
 
     /**
@@ -59,6 +61,7 @@ class TcpSession extends AbstractComponent
      */
     public function get($key = null)
     {
+        $this->extractFileDescriptor();
         return $this->handler->get($key);
     }
 
@@ -70,6 +73,7 @@ class TcpSession extends AbstractComponent
      */
     public function set($key, $value)
     {
+        $this->extractFileDescriptor();
         return $this->handler->set($key, $value);
     }
 
@@ -80,6 +84,7 @@ class TcpSession extends AbstractComponent
      */
     public function delete($key)
     {
+        $this->extractFileDescriptor();
         return $this->handler->delete($key);
     }
 
@@ -89,6 +94,7 @@ class TcpSession extends AbstractComponent
      */
     public function clear()
     {
+        $this->extractFileDescriptor();
         return $this->handler->clear();
     }
 
@@ -99,6 +105,7 @@ class TcpSession extends AbstractComponent
      */
     public function has($key)
     {
+        $this->extractFileDescriptor();
         return $this->handler->has($key);
     }
 
