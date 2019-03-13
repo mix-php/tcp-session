@@ -26,30 +26,23 @@ class TcpSession extends AbstractComponent
     public $handler;
 
     /**
-     * 文件描述符
-     * @var int
+     * 获取文件描述符
+     * 为了实现可在任意子协程中使用，必须每次使用都提取当前的文件描述符
+     * @return int
      */
-    public $fd;
-
-    /**
-     * 初始化
-     * 为了支持 TcpSession 在全部的子协程中使用，必须每次使用都提取当前的文件描述符
-     */
-    protected function initialize()
+    protected function getFileDescriptor()
     {
         // 设置fd
         if (\Mix::$app->isRunning('tcp')) {
-            $this->fd = \Mix::$app->tcp->fd;
-            return;
+            return \Mix::$app->tcp->fd;
         }
         if (\Mix::$app->isRunning('ws')) {
-            $this->fd = \Mix::$app->ws->fd;
-            return;
+            return \Mix::$app->ws->fd;
         }
         if (\Mix::$app->isRunning('request')) {
-            $this->fd = \Mix::$app->request->fd;
-            return;
+            return \Mix::$app->request->fd;
         }
+        return -1;
     }
 
     /**
@@ -59,8 +52,8 @@ class TcpSession extends AbstractComponent
      */
     public function get($key = null)
     {
-        $this->initialize();
-        return $this->handler->get($key);
+        $fd = $this->getFileDescriptor();
+        return $this->handler->get($fd, $key);
     }
 
     /**
@@ -71,8 +64,8 @@ class TcpSession extends AbstractComponent
      */
     public function set($key, $value)
     {
-        $this->initialize();
-        return $this->handler->set($key, $value);
+        $fd = $this->getFileDescriptor();
+        return $this->handler->set($fd, $key, $value);
     }
 
     /**
@@ -82,8 +75,8 @@ class TcpSession extends AbstractComponent
      */
     public function delete($key)
     {
-        $this->initialize();
-        return $this->handler->delete($key);
+        $fd = $this->getFileDescriptor();
+        return $this->handler->delete($fd, $key);
     }
 
     /**
@@ -92,8 +85,8 @@ class TcpSession extends AbstractComponent
      */
     public function clear()
     {
-        $this->initialize();
-        return $this->handler->clear();
+        $fd = $this->getFileDescriptor();
+        return $this->handler->clear($fd);
     }
 
     /**
@@ -103,8 +96,8 @@ class TcpSession extends AbstractComponent
      */
     public function has($key)
     {
-        $this->initialize();
-        return $this->handler->has($key);
+        $fd = $this->getFileDescriptor();
+        return $this->handler->has($fd, $key);
     }
 
 }

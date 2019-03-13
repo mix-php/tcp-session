@@ -13,11 +13,6 @@ class ArrayHandler extends AbstractComponent implements HandlerInterface
 {
 
     /**
-     * @var \Mix\Tcp\Session\TcpSession
-     */
-    public $parent;
-
-    /**
      * WebSocket会话数据
      * @var array
      */
@@ -25,13 +20,13 @@ class ArrayHandler extends AbstractComponent implements HandlerInterface
 
     /**
      * 获取
-     * @param null $key
+     * @param $fd
+     * @param $key
      * @return mixed
      */
-    public function get($key = null)
+    public function get($fd, $key = null)
     {
         $session = &$this->_session;
-        $fd      = $this->parent->fd;
         if (is_null($key)) {
             return $session[$fd] ?? [];
         }
@@ -40,52 +35,52 @@ class ArrayHandler extends AbstractComponent implements HandlerInterface
 
     /**
      * 设置
+     * @param $fd
      * @param $key
      * @param $value
      * @return bool
      */
-    public function set($key, $value)
+    public function set($fd, $key, $value)
     {
         $session            = &$this->_session;
-        $fd                 = $this->parent->fd;
         $session[$fd][$key] = $value;
         return true;
     }
 
     /**
      * 删除
+     * @param $fd
      * @param $key
      * @return bool
      */
-    public function delete($key)
+    public function delete($fd, $key)
     {
         $session = &$this->_session;
-        $fd      = $this->parent->fd;
         unset($session[$fd][$key]);
         return true;
     }
 
     /**
      * 清除
+     * @param $fd
      * @return bool
      */
-    public function clear()
+    public function clear($fd)
     {
         $session = &$this->_session;
-        $fd      = $this->parent->fd;
         unset($session[$fd]);
         return true;
     }
 
     /**
      * 判断是否存在
+     * @param $fd
      * @param $key
      * @return bool
      */
-    public function has($key)
+    public function has($fd, $key)
     {
         $session = &$this->_session;
-        $fd      = $this->parent->fd;
         return isset($session[$fd][$key]) ? true : false;
     }
 

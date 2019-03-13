@@ -12,37 +12,42 @@ interface HandlerInterface
 
     /**
      * 获取
-     * @param null $key
+     * @param $fd
+     * @param $key
      * @return mixed
      */
-    public function get($key = null);
+    public function get($fd, $key = null);
 
     /**
      * 设置
+     * @param $fd
      * @param $key
      * @param $value
      * @return bool
      */
-    public function set($key, $value);
+    public function set($fd, $key, $value);
 
     /**
      * 删除
+     * @param $fd
      * @param $key
      * @return bool
      */
-    public function delete($key);
+    public function delete($fd, $key);
 
     /**
      * 清除
+     * @param $fd
      * @return bool
      */
-    public function clear();
+    public function clear($fd);
 
     /**
      * 判断是否存在
+     * @param $fd
      * @param $key
      * @return bool
      */
-    public function has($key);
+    public function has($fd, $key);
 
 }
