@@ -21,7 +21,7 @@ class TcpSession extends AbstractComponent
 
     /**
      * 处理器
-     * @var \Mix\Tcp\Session\HandlerInterface
+     * @var \Mix\Tcp\Session\TcpSessionHandlerInterface
      */
     public $handler;
 
