@@ -9,7 +9,7 @@ use Mix\Core\Component\AbstractComponent;
  * @package Mix\WebSocket\Session
  * @author LIUJIAN <coder.keda@gmail.com>
  */
-class ArrayHandler extends AbstractComponent implements HandlerInterface
+class ArrayHandler extends AbstractComponent implements TcpSessionHandlerInterface
 {
 
     /**

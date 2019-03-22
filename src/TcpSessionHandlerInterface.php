@@ -3,11 +3,11 @@
 namespace Mix\Tcp\Session;
 
 /**
- * Interface HandlerInterface
- * @package Mix\WebSocket\Session
+ * Interface TcpSessionHandlerInterface
+ * @package Mix\Tcp\Session
  * @author LIUJIAN <coder.keda@gmail.com>
  */
-interface HandlerInterface
+interface TcpSessionHandlerInterface
 {
 
     /**
