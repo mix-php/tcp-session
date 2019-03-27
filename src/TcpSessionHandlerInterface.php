@@ -5,7 +5,7 @@ namespace Mix\Tcp\Session;
 /**
  * Interface TcpSessionHandlerInterface
  * @package Mix\Tcp\Session
- * @author LIUJIAN <coder.keda@gmail.com>
+ * @author liu,jian <coder.keda@gmail.com>
  */
 interface TcpSessionHandlerInterface
 {
