@@ -1,6 +1,6 @@
 {
   "name": "mix/tcp-session",
-  "description": "MixPHP 框架模块 http://www.mixphp.cn",
+  "description": "Mix Tcp Session http://www.mixphp.cn",
   "type": "framework",
   "keywords": [
     "framework",
